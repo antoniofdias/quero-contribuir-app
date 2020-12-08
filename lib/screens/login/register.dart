@@ -20,7 +20,6 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
@@ -33,13 +32,21 @@ class _RegisterState extends State<Register> {
         ],
       ),
       body: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20.0),
+                SizedBox(height: 24.0),
                 TextFormField(
+                  decoration: new InputDecoration(
+                    labelText: "Enter Email",
+                    fillColor: Colors.white,
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      borderSide: new BorderSide(),
+                    ),
+                  ),
                   validator: (val) => val.isEmpty ? 'Enter an e-mail.' : null,
                   onChanged: (val) {
                     setState(() {
@@ -47,8 +54,16 @@ class _RegisterState extends State<Register> {
                     });
                   },
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 24.0),
                 TextFormField(
+                  decoration: new InputDecoration(
+                    labelText: "Enter Password",
+                    fillColor: Colors.white,
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      borderSide: new BorderSide(),
+                    ),
+                  ),
                   validator: (val) => val.length < 6
                       ? 'Password must contain at least 6 characters.'
                       : null,
@@ -59,7 +74,7 @@ class _RegisterState extends State<Register> {
                     });
                   },
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 24.0),
                 RaisedButton(
                     color: Colors.pink[400],
                     child: Text(
