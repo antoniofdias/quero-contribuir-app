@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AddItem extends StatefulWidget {
+class AddProject extends StatefulWidget {
   final Function toggleView;
-  AddItem({this.toggleView});
+  AddProject({this.toggleView});
 
   @override
-  _AddItemState createState() => _AddItemState();
+  _AddProjectState createState() => _AddProjectState();
 }
 
-class _AddItemState extends State<AddItem> {
+class _AddProjectState extends State<AddProject> {
   final _formKey = GlobalKey<FormState>();
 
   File _image;
@@ -41,7 +41,7 @@ class _AddItemState extends State<AddItem> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Add item'),
+        title: Text('Add project'),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),

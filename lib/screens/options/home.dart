@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final tiles = [
+final _tiles = [
   _ProjectTile(
     'Tensorflow',
-    Image.asset('assets/images/tensorflow.png'),
+    Image.asset('assets/images/tensorflow.jpg'),
     'An Open Source Machine Learning Framework for Everyone',
     'https://github.com/tensorflow/tensorflow',
   ),
@@ -33,11 +33,11 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  int _currentIndex = Random().nextInt(tiles.length);
+  int _currentIndex = Random().nextInt(_tiles.length);
 
   _changeState() {
     setState(() {
-      _currentIndex = Random().nextInt(tiles.length);
+      _currentIndex = Random().nextInt(_tiles.length);
     });
   }
 
@@ -48,7 +48,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       child: ListView(
         padding: EdgeInsets.only(top: 16.0),
         children: [
-          tiles[_currentIndex],
+          _tiles[_currentIndex],
           Container(height: 12.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -73,7 +73,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               RaisedButton.icon(
                 onPressed: _changeState,
                 color: Colors.white,
-                padding: EdgeInsets.all(14.0),
+                padding: EdgeInsets.all(12.0),
                 icon: Icon(
                   Icons.thumb_down,
                   size: 30,

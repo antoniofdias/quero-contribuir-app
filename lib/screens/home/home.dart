@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quero_contribuir/screens/options/add_item.dart';
+import 'package:quero_contribuir/screens/options/add_project.dart';
 import 'package:quero_contribuir/screens/options/home.dart';
-import 'package:quero_contribuir/screens/options/my_items.dart';
 import 'package:quero_contribuir/screens/options/my_likes.dart';
+import 'package:quero_contribuir/screens/options/my_projects.dart';
 import 'package:quero_contribuir/services/auth.dart';
 
 class Home extends StatelessWidget {
@@ -36,7 +36,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.computer),
-      label: 'My items',
+      label: 'My projects',
     ),
   ];
 
@@ -57,7 +57,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     } else if (index == 1) {
       return MyLikesWidget();
     } else {
-      return MyItemsWidget();
+      return MyProjectsWidget();
     }
   }
 
@@ -93,7 +93,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddItem()),
+              MaterialPageRoute(builder: (context) => AddProject()),
             );
           },
           child: Icon(Icons.add),

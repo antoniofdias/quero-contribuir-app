@@ -41,7 +41,6 @@ class _SignInState extends State<SignIn> {
                 TextFormField(
                   decoration: new InputDecoration(
                     labelText: "Enter Email",
-                    fillColor: Colors.white,
                     border: new OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(24.0),
                       borderSide: new BorderSide(),
@@ -75,22 +74,25 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
                 SizedBox(height: 24.0),
-                RaisedButton(
-                    color: Colors.pink[400],
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        dynamic result = await _auth.signInWithEmailAndPassword(
-                            email, password);
-                        if (result == null) {
-                          setState(
-                              () => error = 'Please check your credentials.');
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 100.0),
+                  child: RaisedButton(
+                      color: Colors.pink[400],
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          dynamic result = await _auth
+                              .signInWithEmailAndPassword(email, password);
+                          if (result == null) {
+                            setState(
+                                () => error = 'Please check your credentials.');
+                          }
                         }
-                      }
-                    }),
+                      }),
+                ),
                 SizedBox(height: 12.0),
                 Text(
                   error,
