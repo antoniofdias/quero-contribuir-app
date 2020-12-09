@@ -89,6 +89,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       floatingActionButton: Visibility(
         visible: _isFloatingVisible,
         child: FloatingActionButton(
+          backgroundColor: Colors.pink[400],
           onPressed: () {
             Navigator.push(
               context,
