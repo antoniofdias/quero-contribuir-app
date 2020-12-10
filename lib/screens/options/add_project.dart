@@ -2,19 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:quero_contribuir/services/auth.dart';
 import 'package:quero_contribuir/services/database.dart';
 
-class AddItem extends StatefulWidget {
+class AddProject extends StatefulWidget {
   final Function toggleView;
-  AddItem({this.toggleView});
+  AddProject({this.toggleView});
 
   @override
-  _AddItemState createState() => _AddItemState();
+  _AddProjectState createState() => _AddProjectState();
 }
 
-class _AddItemState extends State<AddItem> {
+class _AddProjectState extends State<AddProject> {
   DatabaseService db = new DatabaseService();
   AuthService _auth = AuthService();
 
@@ -47,7 +46,7 @@ class _AddItemState extends State<AddItem> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Add item'),
+        title: Text('Add project'),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
@@ -163,11 +162,6 @@ class _AddItemState extends State<AddItem> {
                         'repoContact': _auth.getUserEmail()
                       };
                       db.addRepo(repoData);
-                      // db.fetchData().then((snapshot) {
-                      //   snapshot.docs.forEach((element) {
-                      //     print(element.data());
-                      //   });
-                      // });
                     }),
               ],
             ),

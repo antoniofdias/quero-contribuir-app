@@ -35,7 +35,7 @@ class _RegisterState extends State<Register> {
           padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
           child: Form(
             key: _formKey,
-            child: Column(
+            child: ListView(
               children: <Widget>[
                 SizedBox(height: 24.0),
                 TextFormField(
@@ -75,22 +75,25 @@ class _RegisterState extends State<Register> {
                   },
                 ),
                 SizedBox(height: 24.0),
-                RaisedButton(
-                    color: Colors.pink[400],
-                    child: Text(
-                      'Register',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        dynamic result = await _auth
-                            .registerWithEmailAndPassword(email, password);
-                        if (result == null) {
-                          setState(
-                              () => error = 'Please supply a valid e-mail.');
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 100.0),
+                  child: RaisedButton(
+                      color: Colors.pink[400],
+                      child: Text(
+                        'Register',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          dynamic result = await _auth
+                              .registerWithEmailAndPassword(email, password);
+                          if (result == null) {
+                            setState(
+                                () => error = 'Please supply a valid e-mail.');
+                          }
                         }
-                      }
-                    }),
+                      }),
+                ),
                 SizedBox(height: 12.0),
                 Text(
                   error,
