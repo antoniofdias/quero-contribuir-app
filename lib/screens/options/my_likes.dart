@@ -1,66 +1,86 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-final _tiles = [
-  _MyLikesTile(
-    'Tensorflow',
-    Image.asset('assets/images/tensorflow.jpg'),
-    'An Open Source Machine Learning Framework for Everyone',
-    'https://github.com/tensorflow/tensorflow',
-  ),
-  _MyLikesTile(
-    'Github',
-    Image.asset('assets/images/github.png'),
-    'The largest and most advanced development platform in the world.',
-    'https://github.com',
-  ),
-  _MyLikesTile(
-    'Geany',
-    Image.asset('assets/images/geany.png'),
-    'Powerful, stable and lightweight programmer\'s text editor.',
-    'https://github.com',
-  ),
-];
+List<MyLikesTile> liked_tiles = [];
 
 class MyLikesWidget extends StatelessWidget {
+  void unique() {
+    List<String> names = [];
+    List<MyLikesTile> tmp = [];
+    for (MyLikesTile x in liked_tiles) {
+      if (!names.contains(x.name)) {
+        tmp.add(x);
+        names.add(x.name);
+      }
+    }
+    liked_tiles = tmp;
+  }
+
   @override
   Widget build(BuildContext context) {
+    unique();
     return ListView.builder(
-      itemCount: 1,
+      itemCount: liked_tiles.length,
       itemBuilder: (context, index) => Padding(
         padding: EdgeInsets.all(0.0),
-        child: _tiles[Random().nextInt(_tiles.length)],
+        child: liked_tiles[index],
       ),
     );
   }
 }
 
-class _MyLikesTile extends StatelessWidget {
-  _MyLikesTile(this._name, this._image, this._description, this._link);
+class MyLikesTile extends StatelessWidget {
+  MyLikesTile(this._name, this._image, this._description, this._link);
 
   final String _name;
   final Image _image;
   final String _description;
   final String _link;
 
+  String get name => _name;
+
+  void sendEmail(address) async {
+    String message = "mailto:" + address + "?subject=Quero Contribuir";
+
+    if (await canLaunch(message)) {
+      launch(message);
+    } else {
+      throw 'Unable to launch';
+    }
+  }
+
+  void accessUrl(site) async {
+    if (await canLaunch(site)) {
+      launch(site);
+    } else {
+      throw "Unable to launch";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: Container(
-          width: 60.0,
-          child: _image,
+    return GestureDetector(
+      onTap: () => accessUrl(_link),
+      child: Card(
+        child: ListTile(
+          leading: Container(
+            width: 60.0,
+            child: _image,
+          ),
+          title: Text(
+            _name,
+            maxLines: 1,
+          ),
+          subtitle: Text(
+            _description,
+            maxLines: 3,
+          ),
+          isThreeLine: true,
+          trailing: GestureDetector(
+            onTap: () => sendEmail('github@github.com'),
+            child: Icon(Icons.mail),
+          ),
         ),
-        title: Text(
-          _name,
-          maxLines: 1,
-        ),
-        subtitle: Text(
-          _description,
-          maxLines: 3,
-        ),
-        isThreeLine: true,
       ),
     );
   }
