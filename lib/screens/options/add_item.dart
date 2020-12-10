@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:quero_contribuir/services/auth.dart';
+import 'package:quero_contribuir/services/database.dart';
+
 class AddItem extends StatefulWidget {
   final Function toggleView;
   AddItem({this.toggleView});
@@ -12,6 +15,9 @@ class AddItem extends StatefulWidget {
 }
 
 class _AddItemState extends State<AddItem> {
+  DatabaseService db = new DatabaseService();
+  AuthService _auth = AuthService();
+
   final _formKey = GlobalKey<FormState>();
 
   File _image;
@@ -112,7 +118,7 @@ class _AddItemState extends State<AddItem> {
                     ),
                   ),
                   validator: (val) =>
-                      _description.isEmpty ? 'Enter a description.' : null,
+                      val.isEmpty ? 'Enter a description.' : null,
                   onChanged: (val) {
                     setState(() {
                       _description = val;
@@ -131,11 +137,10 @@ class _AddItemState extends State<AddItem> {
                       borderSide: new BorderSide(),
                     ),
                   ),
-                  validator: (val) =>
-                      _description.isEmpty ? 'Enter a link.' : null,
+                  validator: (val) => val.isEmpty ? 'Enter a link.' : null,
                   onChanged: (val) {
                     setState(() {
-                      _description = val;
+                      _link = val;
                     });
                   },
                 ),
@@ -150,6 +155,19 @@ class _AddItemState extends State<AddItem> {
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
+                      Map<String, dynamic> repoData = {
+                        'repoName': _name,
+                        'repoDescription': _description,
+                        'repoLink': _link,
+                        'repoLikes': 0,
+                        'repoContact': _auth.getUserEmail()
+                      };
+                      db.addRepo(repoData);
+                      // db.fetchData().then((snapshot) {
+                      //   snapshot.docs.forEach((element) {
+                      //     print(element.data());
+                      //   });
+                      // });
                     }),
               ],
             ),

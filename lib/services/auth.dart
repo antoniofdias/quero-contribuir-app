@@ -37,4 +37,9 @@ class AuthService {
       return null;
     }
   }
+
+  String getUserEmail() {
+    User user = _auth.currentUser;
+    return (user != null) ? user.email : '';
+  }
 }

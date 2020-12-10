@@ -4,7 +4,7 @@ class MyLikesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 1,
       itemBuilder: (context, index) => Padding(
         padding: EdgeInsets.all(0.0),
         child: MyLikesTile(),

@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeWidget extends StatelessWidget {
+  void accessUrl(site) async {
+    if (await canLaunch(site)) {
+      launch(site);
+    } else {
+      throw "Unable to launch";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +45,7 @@ class HomeWidget extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () => accessUrl('https://github.com'),
                     child: Text(
                       'Access Website',
                       style: TextStyle(color: Colors.blue),

@@ -1,6 +1,6 @@
-# quero_contribuir
+# Quero Contribuir
 
-A new Flutter project.
+A Flutter project.
 
 ## Getting Started
 
