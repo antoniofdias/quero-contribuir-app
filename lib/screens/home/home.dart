@@ -36,7 +36,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.computer),
-      label: 'My projects',
+      label: 'All projects',
     ),
   ];
 

@@ -37,7 +37,6 @@ class _AddProjectState extends State<AddProject> {
 
   String _name = '';
   String _description = '';
-  String _error = '';
   String _link = '';
 
   @override
